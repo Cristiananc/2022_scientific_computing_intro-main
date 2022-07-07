@@ -1,0 +1,62 @@
+---
+title: 'Scientific workflows: report'
+author:
+- Andrea Sánchez-Tapia ^*1*^, Sara R. Mortara^*1*^
+- ^*1*^ ¡liibre! laboratório independente de informática da biodiversidade e reprodutibilidade em ecologia
+date: "July 7th 2022"
+output:
+  html_document:
+    df_print: paged
+abstract: |
+  it will be worth reading the report
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(echo = FALSE)
+comm <- read.csv("../data/raw/cestes/comm.csv")
+envir <- read.csv("../data/raw/cestes/envir.csv")
+envir_tbl <- read.csv("../output/02_envir_summary.csv")
+
+```
+
+## Introdution
+
+Writing is not easy and nobody wants to waste time inserting tables and figures in conventional text editors. Therefore, the use of tools that allow automation in text files such as latex and rmarkdown is essential. The learning curve is not as fast as in a conventional text editor, but believe me, it will be worth it.
+
+The purpose of this work is just to show you how to make a manuscript using rmarkdown. It is important to remember that data does not speak for itself and needs context.
+
+## Material and Methods
+
+We used data that is part of the CESTES data base to understand a bit more about species and the environment. The data was colected by de Bélair in 1981 and it was used in the work of [Pavoine 2010](https://doi.org/10.1111/j.1365-2745.2010.01743.x). 
+
+The data represent an ecological plant community in a coastal marsh plain, La Mafragh (Ne Algeria) of `r ncol(comm)` of species distributed in `r nrow(comm)` sites. At each site, the following measurements were taken: `r paste(names(envir), collapse = ", ")`.
+
+
+## Results
+
+Variation of environmental variables across sites is something. 
+
+
+```{r table}
+envir_tbl$mean_std <- paste(envir_tbl$mean, envir_tbl$std, sep = " $\\pm$ ")
+knitr::kable(envir_tbl[, c("mean", "mean_std")], 
+             format = "simple",
+             caption = "Table 1. Mean and standard deviation of environmental metrics across sites", 
+             col.names = c("Variable", "Mean (± std)"), 
+             align = c("cc"))
+```
+
+
+Most species are rare and a few species are very abundant. 
+
+
+```{r sad, fig.cap = "Figure 1. Species abundance distribution of a plant community in a coastal marsh plain, La Mafragh (Ne Algeria)", out.width=500}
+knitr::include_graphics("../figs/02_species_abundance.png")
+```
+
+
+
+## Discussion
+
+It is time to synthesize your results and relate your findings with theory. 
