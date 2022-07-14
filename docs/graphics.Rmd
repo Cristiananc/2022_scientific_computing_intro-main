@@ -1,0 +1,54 @@
+---
+title: 'Exporting graphics using R'
+date: "`r Sys.Date()`"
+output:
+  html_document:
+    df_print: paged
+---
+
+We will now reproduce the graphics we created in the Scientific Workflows lecture now using **ggplot2** and we will save the graphic using a function from **ggplot2** instead of using `png()` and `dev.off()`.
+
+## Loading the package
+
+```{r}
+library(ggplot2)
+```
+
+## Reading the data
+
+```{r setup}
+comm <- read.csv("../data/raw/cestes/comm.csv")
+comm_sum <- sort(colSums(comm[, -1]), decreasing = TRUE)
+comm_df <- data.frame(sp = 1:length(comm_sum), n = comm_sum)
+```
+
+## Creating the graphic
+
+```{r plot-create}
+# Defining the theme
+n_breaks <- hist(comm_df$n, plot = FALSE)$breaks
+
+p <- ggplot(comm_df) + 
+  geom_point(mapping = aes(x = sp, y = n), size = 3, alpha = 0.5) +
+  labs(x = "Species rank", y = "Abundance") +
+  scale_y_continuous(breaks = n_breaks) +
+  annotate("text", x = 16, y = 126, label = "italic(Bolboschoenus~maritimus)", parse = TRUE, size = 2) +
+  annotate("text", x = 16, y = 80, label = "italic(Phalaris~coerulescenss)", parse = TRUE, size = 2) +
+  theme_classic()
+```
+
+## Exporting the graphic
+
+```{r, fig.alt='Species rank-abundance curve. On x-axis species are ranked from the most abundant to the least abundant. On y-axis the number of individuals of each species. The curve has a long tail due to lots of rare species and only two species that are very abundant: Bolboschoenus maritimus with 126 individuals and Phalaris coerulescenss with 79 individuals.'}
+
+#Add alternative text for figure for screen readers.
+
+out_dir <- "../figs/"
+if(!dir.exists(out_dir)) dir.create(out_dir)
+p
+ggplot2::ggsave(filename = "../figs/species_abundance_ggplot.png", 
+                dpi = 300, 
+                units = "in", 
+                width = 3.5, 
+                height = 3.5)
+```
