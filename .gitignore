@@ -6,3 +6,10 @@
 
 # Avoid adding html
 *.html
+
+#Avoid all zip files
+*.zip
+
+#Ignore specific folders
+data/shapefiles
+data/raster
