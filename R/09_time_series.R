@@ -26,3 +26,23 @@ ggplot(covid) +
   geom_line(aes(x = date, y = new_confirmed)) +
   theme_minimal()
 
+#Since we have negative cases we will substitute these values
+#per zero
+covid$new_confirmed[covid$new_confirmed < 0] <- 0
+
+ggplot(covid) +
+  geom_line(aes(x = date, y = new_confirmed)) +
+  theme_minimal() +
+  scale_x_date(breaks = "4 months", date_labels = "%y %m") +
+  labs(x = "Date", y = "New cases")
+
+#Rolling mean
+covid$roll_mean <- zoo::rollmean(covid$new_confirmed, 14, fill = NA)
+head(covid)
+
+ggplot(covid) +
+  geom_line(aes(x = date, y = new_confirmed)) +
+  theme_minimal() +
+  scale_x_date(breaks = "4 months", date_labels = "%y %m") +
+  labs(x = "Date", y = "New cases") +
+  geom_line(aes(x = date, y = roll_mean), color = "blue", size = 1.2)
