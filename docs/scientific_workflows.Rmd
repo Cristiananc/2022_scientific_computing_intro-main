@@ -4,6 +4,8 @@ author:
 - Andrea Sánchez-Tapia ^*1*^, Sara R. Mortara^*1*^
 - ^*1*^ ¡liibre! laboratório independente de informática da biodiversidade e reprodutibilidade em ecologia
 date: "July 7th 2022"
+bibliography: ../citation/refs.bib
+csl: ../citation/journal-of-ecology.csl
 output:
   html_document:
     df_print: paged
@@ -52,7 +54,7 @@ Most species are rare and a few species are very abundant.
 
 
 ```{r sad, fig.cap = "Figure 1. Species abundance distribution of a plant community in a coastal marsh plain, La Mafragh (Ne Algeria)", out.width=500}
-knitr::include_graphics("../figs/02_species_abundance.png")
+knitr::include_graphics("../figs/species_abundance_ggplot.png")
 ```
 
 
@@ -60,3 +62,8 @@ knitr::include_graphics("../figs/02_species_abundance.png")
 ## Discussion
 
 It is time to synthesize your results and relate your findings with theory. 
+
+Citing @zuur_protocol_2010 here!
+
+## References
+<div id="refs"> </div>
