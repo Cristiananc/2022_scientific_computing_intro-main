@@ -82,3 +82,13 @@ st_write(obj = bra, dsn = "data/shapefiles/bra.shp", delete_dsn =  TRUE)
 dir.create(path = "data/raster/", recursive = TRUE)
 tmax_data <- getData(name = "worldclim", var = "tmax", res = 10, path = "data/raster/")
 plot(tmax_data)
+
+is(tmax_data)
+dim(tmax_data)
+extent(tmax_data)
+res(tmax_data)
+
+#Palettes
+library(RColorBrewer)
+display.brewer.all(type = "seq")
+display.brewer.all(type = "div")
