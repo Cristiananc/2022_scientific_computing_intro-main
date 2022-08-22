@@ -4,7 +4,7 @@ dim(comm)
 #Species abundance, frequency and richness --------------
 #1 - Which are the 5 most abundant species overall in the dataset?
 abundance <- colSums(comm[,-1])
-abundance_sorted <- sort(abundance, decreasing = TRUE)
+abundance_sorted <- sort(colSums(comm[,-1]), decreasing = TRUE)
 five_most_abundant <- head(abundance_sorted)
 
 # 2- How many species are there in each plot(site)? (Richness)

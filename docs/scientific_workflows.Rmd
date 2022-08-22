@@ -58,7 +58,6 @@ knitr::include_graphics("../figs/species_abundance_ggplot.png")
 ```
 
 
-
 ## Discussion
 
 It is time to synthesize your results and relate your findings with theory. 
